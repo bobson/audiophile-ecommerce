@@ -1,14 +1,16 @@
 import "./App.css";
-
-import Navigation from "./components/navigation/Navigation";
-
+import NavBar from "./components/navigation/NavBar";
 import HomePage from "./pages/home/HomePage";
+import BestAudio from "./components/best-audio/BestAudio";
+import Footer from "./components/footer/Footer";
 
 function App() {
   return (
     <>
-      <Navigation />
+      <NavBar />
       <HomePage />
+      <BestAudio />
+      <Footer />
     </>
   );
 }

@@ -1,15 +1,48 @@
-.hero-section {
-    background-color: var(--clr-black);
+.hero-img {
+    position: relative;
+
+    & img {
+        inline-size: 100%;
+    }
 }
 
-.hero-wrapper {
+.content-wrapper {
     color: var(--clr-white);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding-block: 4rem;
+    position: absolute;
+    inset: 0;
+    inline-size: 100%;
+    block-size: 100%;
+}
+
+
+.hero-content {
+    position: absolute;
+    max-inline-size: 23.75rem;
+    z-index: 10;
+    background-color: transparent;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+
+    @media(width > 1062px) {
+        left: 0;
+        text-align: start;
+        margin-inline-start: 3rem;
+
+        & button {
+            margin-inline-start: 0;
+        }
+
+        /* margin-inline-start: 3rem; */
+    }
 }
 
 .hero-title span {
@@ -17,7 +50,17 @@
     text-transform: uppercase;
     font-size: var(--fs-300);
     letter-spacing: var(--ls-300);
+    margin: 0;
+    padding: 0;
+}
 
+.products img {
+    inline-size: 100%;
+}
+
+.products {
+    display: grid;
+    gap: 1.5rem;
 }
 
 .product-article {
@@ -30,26 +73,104 @@
     background-color: var(--clr-primary);
     color: var(--clr-white);
     padding: 3.5rem 1.5rem 2.5rem;
-    /* block-size: 600px; */
     text-align: center;
     position: relative;
     overflow: hidden;
     justify-content: center;
+    position: relative;
+
+    @media (width > 800px) {
+        grid-template-columns: 1fr 1fr;
+        padding: 5rem;
+    }
 }
 
 .product-img img {
     inline-size: 60%;
     margin-inline: auto;
+
+    @media (width > 800px) {
+        inline-size: 35%;
+        position: absolute;
+        top: 5rem;
+    }
 }
 
 .circles {
     position: absolute;
     left: 0;
     right: 0;
-    /* top: -1rem; */
     transform: scale(1.7);
+
+    @media (width > 800px) {
+        transform: scale(1);
+        left: -15rem;
+        top: -6rem;
+    }
 }
 
 .product-content {
     max-inline-size: 21.875rem;
+}
+
+.speaker-img {
+    border-radius: 0.5rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.speaker-contenxt {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    padding-inline: 1.5rem;
+
+    @media (width > 800px) {
+        padding-inline: 3rem;
+    }
+}
+
+.speaker-contenxt button {
+    margin-inline-start: 0;
+}
+
+
+.earphones-article {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 1.5rem;
+    text-align: center;
+    border-radius: 0.5rem;
+
+    @media (width > 800px) {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: none;
+        text-align: left;
+    }
+}
+
+.earphones-img {
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.earphones-content {
+    background-color: var(--clr-gray-200);
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    @media (width > 800px) {
+        align-items: flex-start;
+        padding-inline-start: 4rem;
+
+        button {
+            margin-inline: 0;
+        }
+
+
+    }
 }

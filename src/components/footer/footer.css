@@ -1,0 +1,119 @@
+.app-footer {
+    background-color: var(--clr-black);
+}
+
+.app-footer-wrapper {
+    padding-block-start: 5rem;
+    padding-block-end: 3rem;
+    color: var(--clr-white);
+    display: grid;
+    grid-template-areas:
+        "header"
+        "description"
+        "copyright"
+        "social";
+    gap: 4rem;
+    place-items: center;
+    position: relative;
+
+    @media (width > 600px) {
+        place-items: start;
+        text-align: start;
+        grid-template-areas:
+            "header header"
+            "description description"
+            "copyright social";
+    }
+
+    @media (width > 900px) {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "header header"
+            "description social"
+            "copyright copyright";
+    }
+}
+
+.line {
+    inline-size: 6.25rem;
+    block-size: 0.25rem;
+    background-color: var(--clr-primary);
+    position: absolute;
+    top: 0;
+
+    @media (width > 600px) {
+        left: 1.5rem;
+    }
+
+    @media (width > 900px) {
+        left: 2.5rem;
+    }
+}
+
+.footer-header {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 3rem;
+    grid-area: header;
+
+    @media (width > 600px) {
+        align-items: start;
+    }
+
+    @media (width > 900px) {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        inline-size: 100%;
+    }
+}
+
+.footer-navigation .nav-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    font-size: var(--fs-200);
+    line-height: var(--ls-200);
+    letter-spacing: var(--ls-200);
+
+    @media (width > 600px) {
+        flex-direction: row;
+        gap: 2rem;
+        font-size: var(--fs-400);
+        line-height: var(--ls-400);
+        letter-spacing: var(--ls-400);
+    }
+}
+
+.description {
+    grid-area: description;
+}
+
+.copyright {
+    grid-row: 3;
+    grid-area: copyright;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+    grid-area: social;
+    align-items: center;
+
+    @media (width > 600px) {
+        margin-inline-start: auto;
+    }
+
+    @media (width > 900px) {
+        margin-block-start: auto;
+    }
+}
+
+
+.social-link:hover {
+    & img {
+        filter: invert(50%) sepia(80%) saturate(500%);
+    }
+}

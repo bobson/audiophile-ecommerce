@@ -1,0 +1,28 @@
+.best-audio {
+    display: grid;
+    gap: 2.5rem;
+
+    @media (width > 1000px) {
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        text-align: start;
+        gap: 10rem;
+    }
+}
+
+.best-audio-img {
+    border-radius: 0.5rem;
+    overflow: hidden;
+
+    & img {
+        inline-size: 100%;
+    }
+
+    @media (width > 1000px) {
+        order: 2;
+    }
+}
+
+.diferent {
+    color: var(--clr-primary);
+}
