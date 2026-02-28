@@ -1,3 +1,4 @@
+import Navigation from "../navigation/navigation";
 import "./footer.css";
 
 const Footer = () => {
@@ -7,30 +8,7 @@ const Footer = () => {
         <div className="line"></div>
         <div className="footer-header">
           <img src="assets/shared/desktop/logo.svg" alt="audiophile logo" />
-          <nav className="footer-navigation">
-            <ul className="nav-list" role="list">
-              <li>
-                <a className="nav-link" href="#">
-                  Home
-                </a>
-              </li>
-              <li>
-                <a className="nav-link" href="#">
-                  Headphones
-                </a>
-              </li>
-              <li>
-                <a className="nav-link" href="#">
-                  Speakers
-                </a>
-              </li>
-              <li>
-                <a className="nav-link" href="#">
-                  Earphones
-                </a>
-              </li>
-            </ul>
-          </nav>
+          <Navigation className="footer-navigation" />
         </div>
 
         <p className="light-text description">

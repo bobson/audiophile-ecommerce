@@ -1,0 +1,7 @@
+.main-navigation {
+    display: none;
+
+    @media (width > 1062px) {
+        display: block;
+    }
+}

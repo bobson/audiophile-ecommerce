@@ -1,6 +1,12 @@
-import "./homepage.css";
+import { createLazyFileRoute } from "@tanstack/react-router";
 
-import CategoriesLinks from "../../components/categories-links/CategoriesLinks";
+import "./index.css";
+
+export const Route = createLazyFileRoute("/")({
+  component: HomePage,
+});
+
+import CategoriesLinks from "../components/categories-links/CategoriesLinks";
 
 export default function HomePage() {
   return (

@@ -39,31 +39,3 @@ header {
         display: none;
     }
 }
-
-.main-navigation {
-    display: none;
-
-    @media (width > 1062px) {
-        display: block;
-    }
-}
-
-.nav-list {
-    display: flex;
-    /* flex-wrap: wrap; */
-    gap: 2rem;
-}
-
-.nav-link {
-    color: var(--clr-white);
-    text-decoration: none;
-    text-transform: uppercase;
-    font-size: var(--fs-200);
-    line-height: var(--ls-200);
-    letter-spacing: var(--ls-200);
-    font-weight: 700;
-}
-
-.nav-link:hover {
-    color: var(--clr-primary);
-}
