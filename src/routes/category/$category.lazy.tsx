@@ -1,5 +1,8 @@
 import { createLazyFileRoute, Link } from "@tanstack/react-router";
 import data from "../../../data.json";
+import CategoriesLinks from "../../components/categories-links/CategoriesLinks";
+import "./category.css";
+import type { CategoryProduct } from "../../types";
 
 export const Route = createLazyFileRoute("/category/$category")({
   component: RouteComponent,
@@ -7,48 +10,59 @@ export const Route = createLazyFileRoute("/category/$category")({
 
 function RouteComponent() {
   const { category } = Route.useParams();
-  const products = data.filter((product) => product.category === category);
 
-  if (!products || products.length === 0) {
-    return <div>Loading or No Products Found...</div>;
-  }
+  const products: CategoryProduct[] = data.filter(
+    (product) => product.category === category,
+  );
 
   return (
     <>
       <div className="category-hero">
-        <h1>{category}</h1>
+        <h1 className="category-hero__title">{category}</h1>
       </div>
+      <div className="wrapper">
+        {products
+          .slice()
+          .reverse()
+          .map((product) => (
+            <section className="product-card" key={product.slug}>
+              <picture className="product-card__img">
+                <source
+                  media="(min-width: 800px)"
+                  srcSet={`/${product.categoryImage.desktop}`}
+                />
+                <source
+                  media="(min-width: 500px)"
+                  srcSet={`/${product.categoryImage.tablet}`}
+                />
+                <img
+                  src={`/${product.categoryImage.mobile}`}
+                  alt={product.name}
+                />
+              </picture>
 
-      <section className="category-products">
-        {products.map((product) => (
-          <article className="category-article" key={product.slug}>
-            <picture className="category-img">
-              <source
-                media="(min-width: 800px)"
-                srcSet={product.categoryImage.desktop}
-              />
-              <source
-                media="(min-width: 500px)"
-                srcSet={product.categoryImage.tablet}
-              />
-              <img src={product.categoryImage.mobile} alt={product.name} />
-            </picture>
-
-            <div className="category-content flow">
-              <h2 className="large-heading dark-text">{product.name}</h2>
-              <p className="dark-text">{product.description}</p>
-              <Link
-                to="/product/$productId"
-                params={{
-                  productSlug: product.slug,
-                }}
-              >
-                <button className="btn btn-secondary">See product</button>
-              </Link>
-            </div>
-          </article>
-        ))}
-      </section>
+              <div className="product-card__content flow">
+                <h2>
+                  {product.new && (
+                    <span className="new-badge">New Product </span>
+                  )}
+                  {product.name}
+                </h2>
+                <p className="dark-text">{product.description}</p>
+                <Link
+                  className="btn btn-primary"
+                  to="/product/$product"
+                  params={{
+                    product: product.slug,
+                  }}
+                >
+                  See product
+                </Link>
+              </div>
+            </section>
+          ))}
+        <CategoriesLinks />
+      </div>
     </>
   );
 }

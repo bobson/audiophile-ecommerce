@@ -23,7 +23,7 @@
 .hero-content {
     position: absolute;
     max-inline-size: 23.75rem;
-    z-index: 10;
+    z-index: 5;
     background-color: transparent;
     top: 50%;
     transform: translateY(-50%);
@@ -85,7 +85,7 @@
     }
 }
 
-.product-img img {
+.product-article__img img {
     inline-size: 60%;
     margin-inline: auto;
 

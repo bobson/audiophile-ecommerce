@@ -1,4 +1,4 @@
-import { createLazyFileRoute } from "@tanstack/react-router";
+import { createLazyFileRoute, Link } from "@tanstack/react-router";
 
 import "./index.css";
 
@@ -33,12 +33,17 @@ export default function HomePage() {
                 Experience natural, lifelike audio and exceptional build quality
                 made for the passionate music enthusiast.
               </p>
-              <button className="btn btn-primary">See product</button>
+              <Link
+                to="/product/xx99-mark-two-headphones"
+                className="btn btn-primary"
+              >
+                See product
+              </Link>
             </div>
           </div>
         </picture>
       </div>
-      <main className="wrapper home-main">
+      <div className="wrapper content">
         <CategoriesLinks />
 
         <section className="products">
@@ -48,7 +53,7 @@ export default function HomePage() {
               src="assets/home/desktop/pattern-circles.svg"
               alt=""
             />
-            <picture className="product-img">
+            <picture className="product-article__img">
               <source
                 media="(width > 800px)"
                 srcSet="assets/home/desktop/image-speaker-zx9.png"
@@ -116,7 +121,7 @@ export default function HomePage() {
             </div>
           </article>
         </section>
-      </main>
+      </div>
     </>
   );
 }

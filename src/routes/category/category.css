@@ -1,0 +1,35 @@
+.category-hero {
+    text-align: center;
+    padding-block: 3rem;
+    background-color: black;
+}
+
+.category-hero__title {
+    color: white;
+    font-size: var(--fs-700);
+    line-height: var(--lh-700);
+    letter-spacing: var(--ls-700);
+    text-transform: uppercase;
+
+    @media(width > 768px) {
+        font-size: var(--fs-800);
+        line-height: var(--lh-800);
+        letter-spacing: var(--ls-800);
+    }
+}
+
+.product-card {
+    display: grid;
+    gap: 2rem;
+}
+
+.product-card__img img {
+    border-radius: 0.5rem;
+}
+
+.new-badge {
+    color: var(--clr-primary);
+    font-size: var(--fs-300);
+    letter-spacing: var(--ls-300);
+    text-transform: uppercase;
+}

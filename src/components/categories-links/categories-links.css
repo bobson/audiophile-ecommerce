@@ -1,4 +1,4 @@
-.categories {
+.categorie-links {
     display: grid;
     gap: 1rem;
 
@@ -8,7 +8,7 @@
     }
 }
 
-.category-article {
+.category-link {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -20,11 +20,25 @@
     cursor: pointer;
 }
 
-.category-article:hover button {
+.category-link__header {
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--text-extra-dark);
+    font-size: var(--fs-400);
+    letter-spacing: 1.07px;
+    line-height: auto;
+
+    @media(width > 1200px) {
+        font-size: var(--fs-500);
+        letter-spacing: var(--ls-500);
+    }
+}
+
+.category-link:hover .btn {
     color: var(--clr-primary);
 }
 
-.category-img {
+.category-link__img {
     inline-size: 50%;
     margin-block-start: -20%;
 }
