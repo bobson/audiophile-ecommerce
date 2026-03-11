@@ -1,70 +1,46 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import Navigation from "../navigation/navigation";
 
 import "./header.css";
 import CategoriesLinks from "../categories-links/CategoriesLinks";
+import Cart from "../cart/Cart";
+import { useFocusTrap } from "../../hooks/useFocusTrap";
 
 const Header = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
-  const headerRef = useRef<HTMLElement | null>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const cartRef = useRef<HTMLDivElement>(null);
 
   function toggleMenu() {
-    setIsOpen((prev) => !prev);
+    setIsMenuOpen((prev) => !prev);
   }
 
   function closeMenu() {
-    setIsOpen(false);
+    setIsMenuOpen(false);
   }
 
-  useEffect(() => {
-    if (!isOpen || !headerRef.current) return;
+  function toggleCart() {
+    setIsCartOpen((prev) => !prev);
+  }
 
-    const focusableSelectors =
-      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
-    const focusableElements = Array.from(
-      headerRef.current.querySelectorAll<HTMLElement>(focusableSelectors),
-    );
+  function closeCart() {
+    setIsCartOpen(false);
+  }
 
-    if (focusableElements.length === 0) return;
-
-    const firstElement = focusableElements[0];
-    const lastElement = focusableElements[focusableElements.length - 1];
-
-    // Focus first element when menu opens
-    firstElement.focus();
-
-    function handleKeyDown(e: KeyboardEvent) {
-      if (e.key !== "Tab") return;
-
-      if (e.shiftKey) {
-        // Shift + Tab
-        if (document.activeElement === firstElement) {
-          e.preventDefault();
-          lastElement.focus();
-        }
-      } else {
-        // Tab
-        if (document.activeElement === lastElement) {
-          e.preventDefault();
-          firstElement.focus();
-        }
-      }
-    }
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen]);
+  useFocusTrap(isMenuOpen, menuRef);
+  useFocusTrap(isCartOpen, cartRef);
 
   return (
-    <header ref={headerRef}>
+    <header>
       <div className="wrapper header-wrapper">
         <button
           className="hamburger"
           aria-label="Open menu"
           aria-controls="mobile-menu"
-          aria-expanded={isOpen}
+          aria-expanded={isMenuOpen}
           onClick={toggleMenu}
         >
           <img src="assets/shared/tablet/icon-hamburger.svg" alt="" />
@@ -76,14 +52,34 @@ const Header = () => {
 
         <Navigation className="main-navigation" />
 
-        <button className="cart-icon" aria-label="Open cart">
+        <button
+          onClick={toggleCart}
+          className="cart-icon"
+          aria-label="Open cart"
+        >
           <img src="assets/shared/desktop/icon-cart.svg" alt="" />
         </button>
       </div>
 
-      <div className={`overlay ${isOpen ? "open" : ""}`} onClick={closeMenu}>
-        <div className={`mobile-nav wrapper ${isOpen ? "open" : ""}`}>
+      <div
+        className={`overlay ${isMenuOpen ? "open" : ""}`}
+        onClick={closeMenu}
+      >
+        <div
+          ref={menuRef}
+          className={`mobile-nav wrapper ${isMenuOpen ? "open" : ""}`}
+        >
           <CategoriesLinks />
+        </div>
+      </div>
+
+      <div
+        className={`overlay ${isCartOpen ? "open" : ""}`}
+        onClick={closeCart}
+        ref={cartRef}
+      >
+        <div className={`cart-wrapper  ${isCartOpen ? "open" : ""}`}>
+          <Cart />
         </div>
       </div>
     </header>

@@ -1,0 +1,25 @@
+.cart {
+    padding: 2rem;
+    background-color: var(--clr-white);
+    display: grid;
+    gap: 1rem;
+    margin: 1rem;
+    border-radius: 0.5rem;
+    max-inline-size: 377px;
+    z-index: 1000;
+}
+
+.cart-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: space-between;
+}
+
+
+
+.cart-image {
+    inline-size: 4rem;
+    block-size: 4rem;
+    border-radius: 0.5rem;
+}

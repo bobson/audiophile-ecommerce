@@ -59,3 +59,23 @@ export type CategoryProduct = {
   new: boolean;
   description: string;
 };
+
+export type CartProduct = Pick<
+  Product,
+  "id" | "slug" | "name" | "price" | "image"
+>;
+
+export type CartItem = {
+  product: Product;
+  quantity: number;
+};
+
+export type Cart = {
+  cart: CartItem[];
+  addToCart: (product: Product, quantity?: number) => void;
+  removeFromCart: (productSlug: string) => void;
+  increaseQuantity: (productSlug: string, quantity: number) => void;
+  decreaseQuantity: (productSlug: string, quantity: number) => void;
+  totalQuantity: number;
+  totalPrice: number;
+};

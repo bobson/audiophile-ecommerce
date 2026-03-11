@@ -45,6 +45,10 @@
     }
 }
 
+.hero-img img {
+    border-radius: 0;
+}
+
 .hero-title span {
     color: hsl(0, 0%, 100%, 0.5);
     text-transform: uppercase;
@@ -89,6 +93,7 @@
     inline-size: 60%;
     margin-inline: auto;
 
+
     @media (width > 800px) {
         inline-size: 35%;
         position: absolute;
@@ -101,6 +106,7 @@
     left: 0;
     right: 0;
     transform: scale(1.7);
+    z-index: 0;
 
     @media (width > 800px) {
         transform: scale(1);
@@ -111,6 +117,7 @@
 
 .product-content {
     max-inline-size: 21.875rem;
+    z-index: 10;
 }
 
 .speaker-img {
@@ -126,6 +133,7 @@
     transform: translateY(-50%);
     padding-inline: 1.5rem;
 
+
     @media (width > 800px) {
         padding-inline: 3rem;
     }
@@ -133,6 +141,7 @@
 
 .speaker-contenxt button {
     margin-inline-start: 0;
+
 }
 
 

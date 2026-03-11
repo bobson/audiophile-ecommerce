@@ -8,7 +8,7 @@ const CategoriesLinks = () => {
       <h2 className="sr-only">Product categoryes</h2>
       {categories.map((category) => (
         <Link
-          to="/category/$category"
+          to="/$category"
           params={{ category }}
           key={category}
           className="category-link"

@@ -4,11 +4,11 @@ import CategoriesLinks from "../../components/categories-links/CategoriesLinks";
 import "./category.css";
 import type { CategoryProduct } from "../../types";
 
-export const Route = createLazyFileRoute("/category/$category")({
-  component: RouteComponent,
+export const Route = createLazyFileRoute("/$category/")({
+  component: CategoryPage,
 });
 
-function RouteComponent() {
+function CategoryPage() {
   const { category } = Route.useParams();
 
   const products: CategoryProduct[] = data.filter(
@@ -44,15 +44,19 @@ function RouteComponent() {
               <div className="product-card__content flow">
                 <h2>
                   {product.new && (
-                    <span className="new-badge">New Product </span>
+                    <>
+                      <span className="new-badge">New Product </span>
+                      <br />
+                    </>
                   )}
                   {product.name}
                 </h2>
                 <p className="dark-text">{product.description}</p>
                 <Link
                   className="btn btn-primary"
-                  to="/product/$product"
+                  to="/$category/$product"
                   params={{
+                    category: category,
                     product: product.slug,
                   }}
                 >

@@ -3,36 +3,63 @@ import data from "../../../data.json";
 import "./product.css";
 import type { Product } from "../../types";
 import CategoriesLinks from "../../components/categories-links/CategoriesLinks";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useCart } from "../../hooks/useCart";
 
-export const Route = createLazyFileRoute("/product/$product")({
-  component: RouteComponent,
+export const Route = createLazyFileRoute("/$category/$product")({
+  component: ProductPage,
 });
 
-function RouteComponent() {
+function ProductPage() {
   const productSlug = Route.useParams().product;
   const product: Product | undefined = data?.find(
     (p) => p.slug === productSlug,
   );
 
   const [quantity, setQuantity] = useState(1);
+  const { cart, addToCart } = useCart();
 
-  function handleDecrement() {
-    if (quantity <= 1) return;
+  useEffect(() => {
+    console.log(cart, "----", quantity);
+  }, [quantity, cart]);
+
+  async function handleDecrement() {
+    if (quantity < 1) return;
     setQuantity((prev) => prev - 1);
   }
 
-  function handleIncrement() {
+  async function handleIncrement() {
     if (quantity >= 10) return;
     setQuantity((prev) => prev + 1);
+  }
+
+  function GoBackLink() {
+    const handleBack = () => {
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.href = "/";
+      }
+    };
+    return (
+      <a
+        className="dark-text back-link"
+        onClick={(e) => {
+          e.preventDefault();
+          handleBack();
+        }}
+      >
+        Go Back
+      </a>
+    );
   }
   if (!product) {
     return <div>Loading or No Products Found...</div>;
   }
-  console.log(productSlug);
+
   return (
     <div className="wrapper">
-      <Link to="/">go back</Link>
+      {GoBackLink()}
       <section className="product">
         <div className="product-top">
           <picture className="product-img">
@@ -62,12 +89,17 @@ function RouteComponent() {
                 <span>{quantity}</span>
                 <button onClick={handleIncrement}>+</button>
               </div>
-              <button className="btn btn-primary">Add to cart</button>
+              <button
+                onClick={() => addToCart(product, quantity)}
+                className="btn btn-primary"
+              >
+                Add to cart
+              </button>
             </div>
           </div>
         </div>
 
-        <div className="product-features flow flow-gap">
+        <div className="product-features flow">
           <h3>Features</h3>
 
           <p className="dark-text">{product.features}</p>
@@ -123,7 +155,7 @@ function RouteComponent() {
       </section>
 
       <section className="product-others">
-        <h3>Yuo may also like</h3>
+        <h2>You may also like</h2>
         <div className="product-others-container">
           {product.others.map((relatedProduct) => (
             <div className="product-others-item" key={relatedProduct.slug}>
@@ -137,13 +169,13 @@ function RouteComponent() {
                   alt={relatedProduct.name}
                 />
               </picture>
-              <h4>{relatedProduct.name}</h4>
-              <a
+              <h3>{relatedProduct.name}</h3>
+              <Link
+                to={`/${relatedProduct.slug.split("-").pop()}/${relatedProduct.slug}`}
                 className="btn btn-primary"
-                href={`/product/${relatedProduct.slug}`}
               >
                 See product
-              </a>
+              </Link>
             </div>
           ))}
         </div>

@@ -34,7 +34,7 @@ header {
 
 
 .overlay {
-    position: fixed;
+    position: absolute;
     inset: 0;
     top: 89px;
     background: rgba(0, 0, 0, 0.4);
@@ -44,7 +44,7 @@ header {
     pointer-events: none;
 
     transition: opacity 0.25s ease;
-    z-index: 1000;
+    z-index: 100;
     overflow: hidden;
 }
 
@@ -63,6 +63,19 @@ header {
 
 .mobile-nav.open {
     transform: translateY(0);
+}
+
+.cart-wrapper {
+    inline-size: fit-content;
+    margin-inline-start: auto;
+    transform: translateY(-100%);
+
+    transition: all 0.3s ease;
+}
+
+.cart-wrapper.open {
+    transform: translateY(0);
+
 }
 
 

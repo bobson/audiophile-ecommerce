@@ -11,7 +11,7 @@ const Navigation = ({ className }: { className: string }) => {
         </li>
         <li>
           <Link
-            to="/category/$category"
+            to="/$category/"
             params={{ category: "headphones" }}
             className="nav-link"
           >
@@ -20,7 +20,7 @@ const Navigation = ({ className }: { className: string }) => {
         </li>
         <li>
           <Link
-            to="/category/$category"
+            to="/$category/"
             params={{ category: "speakers" }}
             className="nav-link"
           >
@@ -29,7 +29,7 @@ const Navigation = ({ className }: { className: string }) => {
         </li>
         <li>
           <Link
-            to="/category/$category"
+            to="/$category/"
             params={{ category: "earphones" }}
             className="nav-link"
           >

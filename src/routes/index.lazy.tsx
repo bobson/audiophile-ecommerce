@@ -34,7 +34,7 @@ export default function HomePage() {
                 made for the passionate music enthusiast.
               </p>
               <Link
-                to="/product/xx99-mark-two-headphones"
+                to="/headphones/xx99-mark-two-headphones"
                 className="btn btn-primary"
               >
                 See product
@@ -75,7 +75,9 @@ export default function HomePage() {
                 Upgrade to premium speakers that are phenomenally built to
                 deliver truly remarkable sound.
               </p>
-              <button className="btn btn-secondary">See product</button>
+              <Link to="speakers/zx9-speaker" className="btn btn-secondary">
+                See product
+              </Link>
             </div>
           </article>
 
@@ -83,7 +85,9 @@ export default function HomePage() {
             <picture className="speaker-img">
               <div className="speaker-contenxt flow">
                 <h2>ZX7 speaker</h2>
-                <button className="btn btn-border">See product</button>
+                <Link to="/speakers/zx7-speaker" className="btn btn-border">
+                  See product
+                </Link>
               </div>
               <source
                 media="(width > 800px)"
@@ -117,7 +121,9 @@ export default function HomePage() {
             </picture>
             <div className="earphones-content flow">
               <h2>YX1 earphones</h2>
-              <button className="btn btn-border">See product</button>
+              <Link to="/earphones/yx1-earphones" className="btn btn-border">
+                See product
+              </Link>
             </div>
           </article>
         </section>
