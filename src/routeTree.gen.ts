@@ -11,16 +11,16 @@
 import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as IndexRouteImport } from './routes/index'
 
-const IndexLazyRouteImport = createFileRoute('/')()
 const CategoryIndexLazyRouteImport = createFileRoute('/$category/')()
 const CategoryProductLazyRouteImport = createFileRoute('/$category/$product')()
 
-const IndexLazyRoute = IndexLazyRouteImport.update({
+const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
-} as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
+} as any)
 const CategoryIndexLazyRoute = CategoryIndexLazyRouteImport.update({
   id: '/$category/',
   path: '/$category/',
@@ -37,18 +37,18 @@ const CategoryProductLazyRoute = CategoryProductLazyRouteImport.update({
 )
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexLazyRoute
+  '/': typeof IndexRoute
   '/$category/$product': typeof CategoryProductLazyRoute
   '/$category/': typeof CategoryIndexLazyRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexLazyRoute
+  '/': typeof IndexRoute
   '/$category/$product': typeof CategoryProductLazyRoute
   '/$category': typeof CategoryIndexLazyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexLazyRoute
+  '/': typeof IndexRoute
   '/$category/$product': typeof CategoryProductLazyRoute
   '/$category/': typeof CategoryIndexLazyRoute
 }
@@ -61,7 +61,7 @@ export interface FileRouteTypes {
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexLazyRoute: typeof IndexLazyRoute
+  IndexRoute: typeof IndexRoute
   CategoryProductLazyRoute: typeof CategoryProductLazyRoute
   CategoryIndexLazyRoute: typeof CategoryIndexLazyRoute
 }
@@ -72,7 +72,7 @@ declare module '@tanstack/react-router' {
       id: '/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexLazyRouteImport
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/$category/': {
@@ -93,7 +93,7 @@ declare module '@tanstack/react-router' {
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexLazyRoute: IndexLazyRoute,
+  IndexRoute: IndexRoute,
   CategoryProductLazyRoute: CategoryProductLazyRoute,
   CategoryIndexLazyRoute: CategoryIndexLazyRoute,
 }
