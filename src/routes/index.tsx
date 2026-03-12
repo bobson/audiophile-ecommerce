@@ -21,27 +21,32 @@ export default function HomePage() {
             media="(width>768px)"
             srcSet="assets/home/tablet/image-header.jpg"
           />
-          <img src="assets/home/mobile/image-header.jpg" alt="headphones" />
-          <div className="wrapper content-wrapper">
-            <div className="hero-content flow">
-              <h1 className="hero-title">
-                <span>New product </span>
-                <br />
-                XX99 Mark II Headphones
-              </h1>
-              <p className="light-text">
-                Experience natural, lifelike audio and exceptional build quality
-                made for the passionate music enthusiast.
-              </p>
-              <Link
-                to="/headphones/xx99-mark-two-headphones"
-                className="btn btn-primary"
-              >
-                See product
-              </Link>
-            </div>
-          </div>
+          <img
+            src="assets/home/mobile/image-header.jpg"
+            alt="XX99 Mark II Headphones hero image"
+            loading="eager"
+            fetchPriority="high"
+          />
         </picture>
+        <div className="wrapper content-wrapper">
+          <div className="hero-content flow">
+            <h1 className="hero-title">
+              <span>New product </span>
+              <br />
+              XX99 Mark II Headphones
+            </h1>
+            <p className="light-text">
+              Experience natural, lifelike audio and exceptional build quality
+              made for the passionate music enthusiast.
+            </p>
+            <Link
+              to="/headphones/xx99-mark-two-headphones"
+              className="btn btn-primary"
+            >
+              See product
+            </Link>
+          </div>
+        </div>
       </div>
       <div className="wrapper content">
         <CategoriesLinks />
