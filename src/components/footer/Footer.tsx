@@ -1,4 +1,4 @@
-import Navigation from "../navigation/navigation";
+import Navigation from "../navigation/Navigation";
 import "./footer.css";
 
 const Footer = () => {

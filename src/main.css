@@ -136,18 +136,18 @@
 
   @font-face {
     font-family: Manrope;
-    src: url(./assets/font/Manrope/static/Manrope-Regular.ttf) format("woff2");
+    src: url(/assets/font/Manrope/static/Manrope-Regular.ttf) format("woff2");
   }
 
   @font-face {
     font-family: Manrope;
-    src: url(./assets/font/Manrope/static/Manrope-Medium.ttf) format("woff2");
+    src: url(/assets/font/Manrope/static/Manrope-Medium.ttf) format("woff2");
     font-weight: 500;
   }
 
   @font-face {
     font-family: Manrope;
-    src: url(./assets/font/Manrope/static/Manrope-Bold.ttf) format("woff2");
+    src: url(/assets/font/Manrope/static/Manrope-Bold.ttf) format("woff2");
     font-weight: 700;
   }
 

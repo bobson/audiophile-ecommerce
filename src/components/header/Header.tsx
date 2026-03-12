@@ -1,11 +1,11 @@
 import { useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import Navigation from "../navigation/navigation";
 
 import "./header.css";
 import CategoriesLinks from "../categories-links/CategoriesLinks";
 import Cart from "../cart/Cart";
 import { useFocusTrap } from "../../hooks/useFocusTrap";
+import Navigation from "../navigation/Navigation";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -43,7 +43,7 @@ const Header = () => {
           aria-expanded={isMenuOpen}
           onClick={toggleMenu}
         >
-          <img src="assets/shared/tablet/icon-hamburger.svg" alt="" />
+          <img src="/assets/shared/tablet/icon-hamburger.svg" alt="" />
         </button>
 
         <Link to="/" aria-label="Audiophile homepage">
@@ -57,7 +57,7 @@ const Header = () => {
           className="cart-icon"
           aria-label="Open cart"
         >
-          <img src="assets/shared/desktop/icon-cart.svg" alt="" />
+          <img src="/assets/shared/desktop/icon-cart.svg" alt="" />
         </button>
       </div>
 
