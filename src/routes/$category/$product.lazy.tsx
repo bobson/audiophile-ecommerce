@@ -24,7 +24,7 @@ function ProductPage() {
   }, [quantity, cart]);
 
   async function handleDecrement() {
-    if (quantity < 1) return;
+    if (quantity === 1) return;
     setQuantity((prev) => prev - 1);
   }
 
