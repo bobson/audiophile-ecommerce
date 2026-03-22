@@ -18,7 +18,14 @@ export function Field({
         <label htmlFor={id} className="field-label">
           {label}
         </label>
-        {error && <span className="field-error">{error}</span>}
+        <span
+          id={`${id}-error`}
+          className="field-error"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          {error}
+        </span>
       </div>
       <input
         ref={inputRef}
@@ -31,6 +38,8 @@ export function Field({
         title={title}
         className={`field-input${error ? " invalid" : ""}`}
         onChange={onChange}
+        aria-invalid={!!error}
+        aria-describedby={`${id}-error`}
       />
     </div>
   );

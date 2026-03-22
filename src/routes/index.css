@@ -1,7 +1,6 @@
 .hero-section {
 
     min-block-size: 663px;
-    background-color: black;
 
     @media (width > 769px) {
         min-block-size: 891px;

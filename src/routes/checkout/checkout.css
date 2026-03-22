@@ -515,6 +515,7 @@ section {
     .summary-panel {
         width: 100%;
         position: static;
+        padding: 24px;
     }
 
     .form-panel {
