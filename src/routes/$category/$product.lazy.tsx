@@ -3,7 +3,7 @@ import data from "../../../data.json";
 import "./product.css";
 import type { Product } from "../../types";
 import CategoriesLinks from "../../components/categories-links/CategoriesLinks";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useCart } from "../../hooks/useCart";
 
 export const Route = createLazyFileRoute("/$category/$product")({
@@ -17,11 +17,7 @@ function ProductPage() {
   );
 
   const [quantity, setQuantity] = useState(1);
-  const { cart, addToCart } = useCart();
-
-  useEffect(() => {
-    console.log(cart, "----", quantity);
-  }, [quantity, cart]);
+  const { addToCart } = useCart();
 
   async function handleDecrement() {
     if (quantity === 1) return;
@@ -60,7 +56,7 @@ function ProductPage() {
   return (
     <div className="wrapper">
       {GoBackLink()}
-      <section className="product">
+      <section className="product section">
         <div className="product-top">
           <picture className="product-img">
             <source

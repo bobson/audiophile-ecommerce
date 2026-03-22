@@ -1,9 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { CartItem } from "../types";
 import { CartContext } from "./CartContext";
 
+const CART_KEY = "audiophile-cart";
+
+function getInitialCart(): CartItem[] {
+  try {
+    const stored = localStorage.getItem(CART_KEY);
+    return stored ? (JSON.parse(stored) as CartItem[]) : [];
+  } catch {
+    return [];
+  }
+}
+
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
-  const [cart, setCart] = useState<CartItem[]>([]);
+  const [cart, setCart] = useState<CartItem[]>(getInitialCart);
+
+  // Sync to localStorage whenever cart changes
+  useEffect(() => {
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+  }, [cart]);
 
   function addToCart(product: CartItem["product"], quantity = 1) {
     setCart((prev) => {
@@ -32,13 +48,13 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     setCart((prev) => prev.filter((item) => item.product.slug !== productSlug));
   }
 
-  function increaseQuantity(productSlug: string, quantity: number) {
+  function increaseQuantity(cartItem: CartItem) {
     setCart((prev) =>
       prev.map((item) => {
-        if (item.product.slug === productSlug) {
+        if (item.product.slug === cartItem.product.slug) {
           return {
             ...item,
-            quantity: item.quantity + quantity,
+            quantity: item.quantity + 1,
           };
         }
         return item;
@@ -46,19 +62,24 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     );
   }
 
-  function decreaseQuantity(productSlug: string, quantity: number) {
-    if (quantity === 1) removeFromCart(productSlug);
+  function decreaseQuantity(cartItem: CartItem) {
+    if (cartItem.quantity < 1) return;
+    if (cartItem.quantity === 1) removeFromCart(cartItem.product.slug);
     setCart((prev) =>
       prev.map((item) => {
-        if (item.product.slug === productSlug) {
+        if (item.product.slug === cartItem.product.slug) {
           return {
             ...item,
-            quantity: item.quantity - quantity,
+            quantity: item.quantity - 1,
           };
         }
         return item;
       }),
     );
+  }
+
+  function clearCart() {
+    setCart([]);
   }
 
   const totalQuantity = cart.reduce((acc, item) => acc + item.quantity, 0);
@@ -77,6 +98,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         increaseQuantity,
         totalQuantity,
         totalPrice,
+        clearCart,
       }}
     >
       {children}

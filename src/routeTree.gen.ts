@@ -13,6 +13,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 
+const CheckoutIndexLazyRouteImport = createFileRoute('/checkout/')()
 const CategoryIndexLazyRouteImport = createFileRoute('/$category/')()
 const CategoryProductLazyRouteImport = createFileRoute('/$category/$product')()
 
@@ -21,6 +22,13 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CheckoutIndexLazyRoute = CheckoutIndexLazyRouteImport.update({
+  id: '/checkout/',
+  path: '/checkout/',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() =>
+  import('./routes/checkout/index.lazy').then((d) => d.Route),
+)
 const CategoryIndexLazyRoute = CategoryIndexLazyRouteImport.update({
   id: '/$category/',
   path: '/$category/',
@@ -40,30 +48,34 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$category/$product': typeof CategoryProductLazyRoute
   '/$category/': typeof CategoryIndexLazyRoute
+  '/checkout/': typeof CheckoutIndexLazyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$category/$product': typeof CategoryProductLazyRoute
   '/$category': typeof CategoryIndexLazyRoute
+  '/checkout': typeof CheckoutIndexLazyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/$category/$product': typeof CategoryProductLazyRoute
   '/$category/': typeof CategoryIndexLazyRoute
+  '/checkout/': typeof CheckoutIndexLazyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/$category/$product' | '/$category/'
+  fullPaths: '/' | '/$category/$product' | '/$category/' | '/checkout/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/$category/$product' | '/$category'
-  id: '__root__' | '/' | '/$category/$product' | '/$category/'
+  to: '/' | '/$category/$product' | '/$category' | '/checkout'
+  id: '__root__' | '/' | '/$category/$product' | '/$category/' | '/checkout/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CategoryProductLazyRoute: typeof CategoryProductLazyRoute
   CategoryIndexLazyRoute: typeof CategoryIndexLazyRoute
+  CheckoutIndexLazyRoute: typeof CheckoutIndexLazyRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -73,6 +85,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout/': {
+      id: '/checkout/'
+      path: '/checkout'
+      fullPath: '/checkout/'
+      preLoaderRoute: typeof CheckoutIndexLazyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/$category/': {
@@ -96,6 +115,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CategoryProductLazyRoute: CategoryProductLazyRoute,
   CategoryIndexLazyRoute: CategoryIndexLazyRoute,
+  CheckoutIndexLazyRoute: CheckoutIndexLazyRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

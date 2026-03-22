@@ -2,7 +2,7 @@ import "./best-audio.css";
 
 const BestAudio = () => {
   return (
-    <section className="best-audio wrapper">
+    <section className="best-audio section wrapper">
       <picture className="best-audio-img">
         <source
           media="(width > 800px)"

@@ -1,4 +1,4 @@
-// types.ts
+import type { ChangeEvent } from "react";
 
 // Type for related products shown in "others" array
 export type RelatedProduct = {
@@ -74,8 +74,25 @@ export type Cart = {
   cart: CartItem[];
   addToCart: (product: Product, quantity?: number) => void;
   removeFromCart: (productSlug: string) => void;
-  increaseQuantity: (productSlug: string, quantity: number) => void;
-  decreaseQuantity: (productSlug: string, quantity: number) => void;
+  increaseQuantity: (cartItem: CartItem) => void;
+  decreaseQuantity: (cartItem: CartItem) => void;
+  clearCart: () => void;
   totalQuantity: number;
   totalPrice: number;
 };
+
+export type PaymentMethod = "emoney" | "cod";
+export type FieldErrors = Record<string, string>;
+
+export interface FieldProps {
+  label: string;
+  id: string;
+  type?: string;
+  placeholder?: string;
+  required?: boolean;
+  pattern?: string;
+  title?: string;
+  inputRef: React.RefObject<HTMLInputElement | null>;
+  error: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+}

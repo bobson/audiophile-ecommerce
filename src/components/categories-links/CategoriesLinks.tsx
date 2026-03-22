@@ -1,10 +1,14 @@
 import { Link } from "@tanstack/react-router";
 import "./categories-links.css";
 
-const CategoriesLinks = () => {
+interface CategoriesLinksProps {
+  onLinkClick?: () => void;
+}
+
+const CategoriesLinks = ({ onLinkClick }: CategoriesLinksProps) => {
   const categories = ["headphones", "speakers", "earphones"];
   return (
-    <section className="categorie-links">
+    <section className="categorie-links section">
       <h2 className="sr-only">Product categoryes</h2>
       {categories.map((category) => (
         <Link
@@ -12,6 +16,7 @@ const CategoriesLinks = () => {
           params={{ category }}
           key={category}
           className="category-link"
+          onClick={onLinkClick}
         >
           <img
             className="category-link__img"

@@ -51,7 +51,7 @@ export default function HomePage() {
       <div className="wrapper content">
         <CategoriesLinks />
 
-        <section className="products">
+        <section className="products section">
           <article className="product-article premium-article">
             <img
               className="circles"

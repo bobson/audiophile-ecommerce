@@ -25,7 +25,7 @@ function CategoryPage() {
           .slice()
           .reverse()
           .map((product) => (
-            <section className="product-card" key={product.slug}>
+            <section className="product-card section" key={product.slug}>
               <picture className="product-card__img">
                 <source
                   media="(min-width: 800px)"

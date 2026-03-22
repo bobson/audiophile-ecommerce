@@ -2,6 +2,7 @@
     display: grid;
     gap: 1rem;
 
+
     @media (width > 600px) {
         grid-template-columns: repeat(3, 1fr);
         gap: 0.625rem;
